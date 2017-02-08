@@ -36,6 +36,7 @@
   "license": "",
   "devDependencies": {
     "async": "^2.1.4",
+    "jade": "^1.11.0",
     "lodash": "^4.17.4",
     "sails-disk": "^0.10.10",
     "sails-hook-autoreload": "^0.13.2"
