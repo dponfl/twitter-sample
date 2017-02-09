@@ -17,7 +17,13 @@
 // (if you're using LESS with the built-in default config, you'll want
 //  to change `assets/styles/importer.less` instead.)
 var cssFilesToInject = [
+  'vendor/bootstrap/dist/css/bootstrap.css',
+  'vendor/bootstrap/dist/css/bootstrap-theme.css',
   'styles/**/*.css'
+];
+
+// Modernizr files injection
+var jsModFilesToInject = [
 ];
 
 
@@ -25,15 +31,32 @@ var cssFilesToInject = [
 // (uses Grunt-style wildcard/glob/splat expressions)
 var jsFilesToInject = [
 
+  // Load jQuery first
+  'vendor/jquery/dist/jquery.js',
+
+  // Load Bootstrap
+  'vendor/bootstrap/dist/js/bootstrap.js',
+
+  // Load Angular
+  'vendor/angular/angular.js',
+  'vendor/angular-resource/angular-resource.js',
+  'vendor/angular-route/angular-route.js',
+
   // Load sails.io before everything else
   'js/dependencies/sails.io.js',
 
-  // Dependencies like jQuery, or Angular are brought in here
   'js/dependencies/**/*.js',
+
+  // Load application modules
+  'js/app/**/module.js',
+
+  // Load other application files
+  'js/app/**/*.js',
+
 
   // All of the rest of your client-side js files
   // will be injected here in no particular order.
-  'js/**/*.js'
+  'js/*.js'
 ];
 
 
@@ -47,7 +70,8 @@ var jsFilesToInject = [
 // templates get spit out to the same file.  Be sure and check out `tasks/README.md`
 // for information on customizing and installing new tasks.
 var templateFilesToInject = [
-  'templates/**/*.html'
+  'templates/**/*.html',
+  'templates/**/*.jade'
 ];
 
 
@@ -68,6 +92,13 @@ module.exports.cssFilesToInject = cssFilesToInject.map(function(cssPath) {
     return require('path').join('!.tmp/public/', cssPath.substr(1));
   }
   return require('path').join('.tmp/public/', cssPath);
+});
+module.exports.jsModFilesToInject = jsModFilesToInject.map(function(jsPath) {
+  // If we're ignoring the file, make sure the ! is at the beginning of the path
+  if (jsPath[0] === '!') {
+    return require('path').join('!.tmp/public/', jsPath.substr(1));
+  }
+  return require('path').join('.tmp/public/', jsPath);
 });
 module.exports.jsFilesToInject = jsFilesToInject.map(function(jsPath) {
   // If we're ignoring the file, make sure the ! is at the beginning of the path
