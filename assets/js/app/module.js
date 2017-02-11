@@ -2,11 +2,30 @@
 
 (function () {
 
-  angular.module('Twitter', []).config(TwitterConfig);
+  angular.module('Twitter', [
+    'ngRoute',
+    'ngResource'
+  ]).config(TwitterConfig);
 
-  TwitterConfig.$inject = ['$routeProvider'];
-  function TwitterConfig($routeProvider) {
-    $routeProvider.when().otherwise();
-  };
+  TwitterConfig.$inject = ['$routeProvider','$locationProvider'];
+  function TwitterConfig($routeProvider, $locationProvider) {
+    $routeProvider
+      .when('/', {
+      templateUrl: 'templates/view/home.html',
+      // controller: 'HomeController'
+    })
+      .when('/test', {
+        templateUrl: 'templates/view/test.html'
+      })
+      .when('/404', {
+        templateUrl: 'templates/view/404.html'
+      })
+      .otherwise({
+      redirectTo: '/404'
+    });
+
+    $locationProvider.hashPrefix('');
+  }
+
 
 })();
