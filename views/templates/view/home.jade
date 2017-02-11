@@ -2,5 +2,14 @@
    Created by DSch on 11.02.2017.
 
 .row
-  .col-sm-10
-    h1 Home page...
+  .col-sm-12
+    h3 Header of home.jade
+  .col-sm-12
+    form
+      .form-group
+        input(type='text', data-ng-model='post').form-control
+      .form-group
+        button(
+          type='button',
+          name='button',
+          data-ng-click='sendPost(post)').btn.btn-success Send
